@@ -1,0 +1,15 @@
+body{
+    background:  rgb(252, 219, 219);
+}
+
+.recipe-list{
+    border-right: 1px solid black;
+    width: 50%;
+    min-height: 100vh;
+}
+
+.recipe-list_add-recipe-btn{
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
