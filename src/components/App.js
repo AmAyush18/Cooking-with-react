@@ -6,29 +6,32 @@ export const ThemeContext = React.createContext();
 
 function App() {
   
-  const { uuid } = require("uuidv4");
   const [recipes, setRecipes] = useState(sampleRecipes);
 
   function handleRecipeAdd() {
     console.log("handleRecipeAdd Clicked")
-    const newRecipe = {
-      id: uuid(),
+    const newRecipe = [{
+      id: Math.round(Math.random * Math.random * 1000),
       name: "New",
       servings: 1,
       cookTime: "1:00",
       instructions: "Instr..",
       ingredients: [
         {
-          id: uuid(),
+          id: Math.round(Math.random * Math.random * 1000),
           name: "Name", 
           amount: "1 tbs",
-        },
-      ],
-    };
+        }
+      ]
+    }];
     setRecipes([...recipes, newRecipe]);
   }
 
-  return <RecipeList recipes={recipes} handleRecipeAdd={handleRecipeAdd} />;
+  function handleRecipeDelete(id){
+    setRecipes(recipes.filter(recipe => recipe.id !== id))
+  }
+
+  return <RecipeList recipes={recipes} handleRecipeAdd={handleRecipeAdd} handleRecipeDelete= {handleRecipeDelete} />;
 }
 
 const sampleRecipes = [

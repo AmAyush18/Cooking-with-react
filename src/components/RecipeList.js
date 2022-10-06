@@ -1,14 +1,23 @@
 import React from "react";
 import Recipe from "./Recipe";
 
-function RecipeList({ recipes, handleRecipeAdd }) {
+function RecipeList(props) {
+  console.log(props.recipes)
+  const {
+    recipes,
+    handleRecipeAdd,
+    handleRecipeDelete
+   } = props
+
   return (
+    
     <div className="recipe-list">
       <div>
         {recipes.map((recipe) => {
           // using this spread operator ...recipe would send all our value in a object in the form of key-value pairs
           return (
             <Recipe key={recipe.id} 
+              handleRecipeDelete = {handleRecipeDelete}
                     {...recipe} 
             />);
         })}
