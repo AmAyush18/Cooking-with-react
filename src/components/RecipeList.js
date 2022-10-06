@@ -13,7 +13,7 @@ function RecipeList(props) {
     
     <div className="recipe-list">
       <div>
-        {recipes.map((recipe) => {
+        {recipes && recipes.map((recipe) => {
           // using this spread operator ...recipe would send all our value in a object in the form of key-value pairs
           return (
             <Recipe key={recipe.id} 

@@ -4,26 +4,34 @@ import "../css/app.css";
 
 export const ThemeContext = React.createContext();
 
+const uid = function(){
+  return Date.now().toString(36) + Math.random().toString(36);
+}
+
 function App() {
   
   const [recipes, setRecipes] = useState(sampleRecipes);
 
+  
+
   function handleRecipeAdd() {
     console.log("handleRecipeAdd Clicked")
-    const newRecipe = [{
-      id: Math.round(Math.random * Math.random * 1000),
-      name: "New",
-      servings: 1,
-      cookTime: "1:00",
-      instructions: "Instr..",
-      ingredients: [
-        {
-          id: Math.round(Math.random * Math.random * 1000),
-          name: "Name", 
-          amount: "1 tbs",
-        }
-      ]
-    }];
+    const newRecipe = [
+      {
+        id: uid(),
+        name: "New Item",
+        cookTime: "1:00",
+        servings: 2,
+        instructions:
+          "1. Just Cook a plain Matar ki Sabji.\n2. Put Paneer in a sabji.\n3. Eat it garma garam.",
+        ingredient: [
+          {
+            id: uid(),
+            name: "Paneer",
+            amount: "400gms",
+          }
+        ],
+      }];
     setRecipes([...recipes, newRecipe]);
   }
 
@@ -36,7 +44,7 @@ function App() {
 
 const sampleRecipes = [
   {
-    id: 1,
+    id: uid(),
     name: "Plain Paneer",
     cookTime: "1:45",
     servings: 3,
@@ -44,12 +52,12 @@ const sampleRecipes = [
       "1. Just Cook a plain Matar ki Sabji.\n2. Put Paneer in a sabji.\n3. Eat it garma garam.",
     ingredient: [
       {
-        id: 1,
+        id: uid,
         name: "Paneer",
         amount: "400gms",
       },
       {
-        id: 2,
+        id: uid(),
         name: "Sabji",
         amount: "400gms",
       },
