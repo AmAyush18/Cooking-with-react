@@ -1,14 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import Recipe from "./Recipe";
+import {RecipeContext} from './App'
 
-function RecipeList(props) {
-  console.log(props.recipes)
-  const {
-    recipes,
-    handleRecipeAdd,
-    handleRecipeDelete
-   } = props
+function RecipeList({recipes}) {
 
+  // we just want handleRecipeAdd so we destructure it
+
+  const { handleRecipeAdd } = useContext(RecipeContext)
+  
   return (
     
     <div className="recipe-list">
@@ -16,8 +15,7 @@ function RecipeList(props) {
         {recipes && recipes.map((recipe) => {
           // using this spread operator ...recipe would send all our value in a object in the form of key-value pairs
           return (
-            <Recipe key={recipe.id} 
-              handleRecipeDelete = {handleRecipeDelete}
+            <Recipe key={recipe.id}
                     {...recipe} 
             />);
         })}

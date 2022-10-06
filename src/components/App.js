@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import RecipeList from "./RecipeList";
 import "../css/app.css";
 
+export const RecipeContext = React.createContext()
 
 export const ThemeContext = React.createContext();
 
@@ -14,7 +15,11 @@ function App() {
   
   const [recipes, setRecipes] = useState(sampleRecipes);
 
-  
+  const recipeContextValue = {
+    // if name of key and value is same we can just specify it once
+    handleRecipeAdd,
+    handleRecipeDelete
+  }
 
   function handleRecipeAdd() {
     console.log("handleRecipeAdd Clicked")
@@ -41,7 +46,10 @@ function App() {
     setRecipes(recipes.filter(recipe => recipe.id !== id))
   }
 
-  return <RecipeList recipes={recipes} handleRecipeAdd={handleRecipeAdd} handleRecipeDelete= {handleRecipeDelete} />;
+  return (
+    <RecipeContext.Provider value={recipeContextValue}>
+        <RecipeList recipes={recipes}  />
+    </RecipeContext.Provider>);
 }
 
 const sampleRecipes = [
