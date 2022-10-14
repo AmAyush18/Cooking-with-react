@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import RecipeList from "./RecipeList";
 import "../css/app.css";
 
 export const RecipeContext = React.createContext()
 
-export const ThemeContext = React.createContext();
+// export const ThemeContext = React.createContext();
 
-const uid = function(){
-  return Date.now().toString(36) + Math.random().toString(36);
-}
+const LOCAL_STORAGE_KEY = 'cookingWithReactApps.recipes'
+
 
 function App() {
   
   const [recipes, setRecipes] = useState(sampleRecipes);
+
+  //For Storing the recipes value each time our app renders
+  useEffect(() => {
+    console.log("Rendered")
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(recipes))
+  }, [recipes]) // this array tells that when to call it, whenever anyof the parameter present in the arrray changes it is called or rendered
+
+   
+  //For loading the values from the local storage and seting it the Recipes 
+  useEffect(() =>{
+    const recipeJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
+    if(recipeJSON != null) setRecipes(JSON.parse(recipeJSON))
+  }, [])
 
   const recipeContextValue = {
     // if name of key and value is same we can just specify it once
